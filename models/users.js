@@ -10,9 +10,10 @@ const getAll = ()=>{
 
 // Registro usuarios 
 
-const insert = ({idDocUsuario, tipoDoc, email, nacimiento, nombre_cliente, clave}) =>{
+const insert = ({idDocUsuario, email, usuario, nombre_cliente, clave}) =>{
  return new Promise((resol,rejec)=>{
- db.query('INSERT INTO usuario (idDocUsuario,email,nombre_cliente,usuario,clave)  VALUES(?,?,?,?,?,?)',[idDocUsuario,email,nacimiento,nombre_cliente,usuario,clave],(err,result)=>{
+ db.query('INSERT INTO usuario (idDocUsuario,email,nombre_cliente,usuario,clave)  VALUES(?,?,?,?,?)',
+ [idDocUsuario,email,nombre_cliente,usuario,clave],(err,result)=>{
     if(err) rejec(err)
     if(result){
         resol(result)
@@ -21,7 +22,7 @@ const insert = ({idDocUsuario, tipoDoc, email, nacimiento, nombre_cliente, clave
  });
 };
 
-// obtener usuarios por su Email
+// Obtener usuarios por su Email
 
 const getEmail = (nEmail)=>{
   return new Promise ((resol,rejec)=>{
@@ -34,20 +35,20 @@ const getEmail = (nEmail)=>{
 
 // obtener usuarios por su Id
 
-const getId = (nId)=>{
-  return new Promise ((resol,rejec)=>{
-    db.query('SELECT * FROM usuario WHERE 	idDocUsuario = ?',[nId],(err,rows)=>{
-      if(err) rejec(err)
-      resol(rows[0])
-    });
-  });
-}; 
+// const getId = (nId)=>{
+//   return new Promise ((resol,rejec)=>{
+//     db.query('SELECT * FROM usuario WHERE 	idDocUsuario = ?',[nId],(err,rows)=>{
+//       if(err) rejec(err)
+//       resol(rows[0])
+//     });
+//   });
+// }; 
 
 
 module.exports = {
   getAll: getAll,
   insert: insert,
   getEmail: getEmail,
-  getId: getId
+  // getId: getId
 
 }
